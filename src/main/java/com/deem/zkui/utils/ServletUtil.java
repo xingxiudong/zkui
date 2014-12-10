@@ -19,17 +19,23 @@ package com.deem.zkui.utils;
 
 import java.io.IOException;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -122,8 +128,19 @@ public enum ServletUtil {
     }
     
     public String externalizeNodeValue(byte[] value) {
-        return value == null ? "" : new String(value).replaceAll("\\n", "\\\\n").replaceAll("\\r", "");
+//    	return value == null ? "" : new String(value).replaceAll("\\n", "\\\\n").replaceAll("\\r", "");
+    	
+    	if (null == value) {
+    		return null;
+    	}
+    	
+    	String s = new String(value).replaceAll("\\n", "\\\\n").replaceAll("\\r", "");
+        try {
+			s = URLEncoder.encode(s, "UTF-8");
+		} catch (UnsupportedEncodingException e) { }
+        
         // We might want to BASE64 encode it
+		return s;
     }
 
     //Using X-Forwarded-For to capture IP addresses coming via load balancer.

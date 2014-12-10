@@ -18,12 +18,15 @@
 package com.deem.zkui.utils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -31,7 +34,9 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
+
 import com.deem.zkui.vo.LeafBean;
+
 import org.slf4j.LoggerFactory;
 
 public enum ZooKeeperUtil {
@@ -147,7 +152,15 @@ public enum ZooKeeperUtil {
     }
     
     private String readExternalizedNodeValue(String raw) {
-        return raw.replaceAll("\\\\n", "\n");
+    	if (null == raw) {
+    		return null;
+    	}
+    	String s = raw;
+    	try {
+			s = URLDecoder.decode(s, "UTF-8");
+		} catch (UnsupportedEncodingException e) { }
+    	
+        return s.replaceAll("\\\\n", "\n");
     }
     
     private void createPathAndNode(String path, String name, byte[] data, boolean force, ZooKeeper zk) throws InterruptedException, KeeperException {

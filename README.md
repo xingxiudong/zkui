@@ -2,6 +2,15 @@ zkui - Zookeeper UI Dashboard
 ====================
 A UI dashboard that allows CRUD operations on Zookeeper.
 
+* Author: <http://www.xingxiudong.com>
+* Fork from: <https://github.com/DeemOpen/zkui>
+
+Fixed by ME
+====================
+1. 修复了添加属性或节点时中文乱码问题；
+2. 修复了 Import 和 Export 时 Node Value 中中文乱码的问题；
+3. 修复了 maven3.1.1 下pom.xml报 “Plugin execution not covered by lifecycle configuration” 错误的问题；
+
 Requirements
 ====================
 Requires Java 7 to run.

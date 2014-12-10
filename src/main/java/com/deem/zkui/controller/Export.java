@@ -61,6 +61,7 @@ public class Export extends HttpServlet {
                 output.append(leaf.getPath()).append('=').append(leaf.getName()).append('=').append(ServletUtil.INSTANCE.externalizeNodeValue(leaf.getValue())).append('\n');
             }// for all leaves
             response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 out.write(output.toString());
             }

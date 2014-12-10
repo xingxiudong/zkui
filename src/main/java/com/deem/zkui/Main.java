@@ -17,11 +17,11 @@
  */
 package com.deem.zkui;
 
-import com.deem.zkui.dao.Dao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;
 import java.util.Properties;
+
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -32,6 +32,8 @@ import org.eclipse.jetty.webapp.Configuration.ClassList;
 import org.eclipse.jetty.webapp.JettyWebXmlConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.LoggerFactory;
+
+import com.deem.zkui.dao.Dao;
 
 public class Main {
 
@@ -64,6 +66,9 @@ public class Main {
         servletContextHandler.setParentLoaderPriority(true);
         servletContextHandler.setInitParameter("useFileMappedBuffer", "false");
         servletContextHandler.setAttribute("globalProps", globalProps);
+        
+        // add CharacterEncodingFilter by http://www.xingxiudong.com @2014-12-10
+        // servletContextHandler.addFilter(new FilterHolder(new CharacterEncodingFilter()), "/*", EnumSet.allOf(DispatcherType.class));
 
         ResourceHandler staticResourceHandler = new ResourceHandler();
         staticResourceHandler.setDirectoriesListed(false);
