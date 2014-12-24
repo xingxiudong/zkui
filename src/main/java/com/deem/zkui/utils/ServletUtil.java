@@ -45,7 +45,7 @@ public enum ServletUtil {
     private final static Logger logger = LoggerFactory.getLogger(ServletUtil.class);
     
     public void renderHtml(HttpServletRequest request, HttpServletResponse response, Map<String, Object> templateParam, String view) throws IOException, TemplateException {
-        
+         
         if (request != null && response != null && templateParam != null) {
             //There is no way to access session info in freemarker template. 
             //Hence all view rendering happens via this function which adds session info to attribute for each request.
@@ -135,9 +135,9 @@ public enum ServletUtil {
     	}
     	
     	String s = new String(value).replaceAll("\\n", "\\\\n").replaceAll("\\r", "");
-        try {
-			s = URLEncoder.encode(s, "UTF-8");
-		} catch (UnsupportedEncodingException e) { }
+//        try {
+//			s = URLEncoder.encode(s, "UTF-8");
+//		} catch (UnsupportedEncodingException e) { }
         
         // We might want to BASE64 encode it
 		return s;

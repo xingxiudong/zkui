@@ -9,7 +9,8 @@ Fixed by ME
 ====================
 1. 修复了添加属性或节点时中文乱码问题；
 2. 修复了 Import 和 Export 时 Node Value 中中文乱码的问题；
-3. 修复了 maven3.1.1 下pom.xml报 “Plugin execution not covered by lifecycle configuration” 错误的问题；
+3. 新增软件打包支持，打jar包的同时也会打zip包（位于bin/目录下）；
+4. 新增了启动和关闭服务脚本；
 
 Requirements
 ====================
@@ -17,10 +18,23 @@ Requires Java 7 to run.
 
 Setup
 ====================
-1. mvn clean install
-2. Copy the config.cfg to the folder with the jar file. Modify it to point to the zookeeper instance. Multiple zk instances are coma separated.  eg: server1:2181,server2:2181. First server should always be the leader.
-3. Run the jar. ( nohup java -jar zkui-2.0-SNAPSHOT-jar-with-dependencies.jar & ) or ( chmod +x *.sh; ./start.sh )
-4. <a href="http://localhost:9090">http://localhost:9090</a> 
+1. Download  
+	wget -O zkui-2.0-SNAPSHOT.zip https://github.com/xingxiudong/zkui/blob/master/bin/zkui-2.0-SNAPSHOT.zip?raw=true
+	or
+	maven clean package
+2. Unzip  
+	unzip zkui-2.0-SNAPSHOT.zip -d /usr/local/zkui2.0
+3. Config  
+	Modify config.cfg file to point to the zookeeper instance. Multiple zk instances are coma separated.  eg: server1:2181,server2:2181. First server should always be the leader.
+4. Run  
+	nohup java -jar zkui-2.0-SNAPSHOT-jar-with-dependencies.jar &
+	or 
+	chmod +x *.sh;
+	./start.sh
+5. Check  
+	jps 可见进程 zkui-2.0-SNAPSHOT-jar-with-dependencies.jar
+	or
+	<a href="http://localhost:9090">http://localhost:9090</a> 
 
 Login Info
 ====================

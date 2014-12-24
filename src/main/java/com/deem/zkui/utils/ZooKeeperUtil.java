@@ -156,9 +156,9 @@ public enum ZooKeeperUtil {
     		return null;
     	}
     	String s = raw;
-    	try {
-			s = URLDecoder.decode(s, "UTF-8");
-		} catch (UnsupportedEncodingException e) { }
+//    	try {
+//			s = URLDecoder.decode(s, "UTF-8");
+//		} catch (UnsupportedEncodingException e) { }
     	
         return s.replaceAll("\\\\n", "\n");
     }
